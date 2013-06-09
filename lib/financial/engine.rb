@@ -1,6 +1,15 @@
 module Financial
   class Engine < ::Rails::Engine
     isolate_namespace Financial
+
+    #to avoid copy engine migration to main app migration, just tell the main app that there is migration in this engine
+    #see: http://pivotallabs.com/leave-your-migrations-in-your-rails-engines/
+    initializer :append_migrations do |app|
+      unless app.root.to_s.match root.to_s
+        app.config.paths["db/migrate"] += config.paths["db/migrate"].expanded
+      end
+    end
+
     require 'rubygems'
     require 'tabs_on_rails'
     config.generators do |g|
