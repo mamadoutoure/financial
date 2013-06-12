@@ -1,6 +1,6 @@
-class CreateExpenses < ActiveRecord::Migration
+class CreateFinancialExpenses < ActiveRecord::Migration
   def change
-    create_table :expenses do |t|
+    create_table :financial_expenses do |t|
       t.column :exp_date , :date
       t.column :exp_type_id, :integer
       t.column :amount, :decimal, :precision=>12, :scale=>2
