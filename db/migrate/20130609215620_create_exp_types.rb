@@ -1,6 +1,6 @@
-class CreateExpTypes < ActiveRecord::Migration
+class CreateFinancialExpTypes < ActiveRecord::Migration
   def change
-    create_table :exp_types do |t|
+    create_table :financial_exp_types do |t|
       t.column :description, :string, :limit=>64
       t.timestamps
     end
