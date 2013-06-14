@@ -1,5 +1,5 @@
 module Financial
-  class Invesment < ActiveRecord::Base
+  class Investment < ActiveRecord::Base
     attr_accessible :principal, :rate, :monthly_dep, :months 
     belongs_to :budget
     def future_value
