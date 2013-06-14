@@ -13,7 +13,7 @@ class CreateFinancialMortgages < ActiveRecord::Migration
       t.column :revenue, :decimal, :precision=>12, :scale=>2
       t.column :avg_monthly_expense, :decimal, :precision=>12, :scale=>2
       t.column :net_monthly_income, :decimal, :precision=>12, :scale=>2
-      t.column :financial_budget_id, :integer
+      t.column :budget_id, :integer
       t.timestamps
     end
   end

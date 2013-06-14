@@ -5,7 +5,7 @@ class CreateFinancialInvestments < ActiveRecord::Migration
       t.column :rate, :decimal, :precision=>12, :scale=>2
       t.column :monthly_dep, :decimal, :precision=>12, :scale=>2
       t.column :months, :integer
-      t.column :financial_budget_id, :integer
+      t.column :budget_id, :integer
       t.timestamps
     end
   end
