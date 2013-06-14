@@ -1,7 +1,7 @@
 module Financial
   class Invesment < ActiveRecord::Base
     attr_accessible :principal, :rate, :monthly_dep, :months 
-
+    belongs_to :budget
     def future_value
       percentage_rate = rate / 100
       yearly_dep = monthly_dep * 12

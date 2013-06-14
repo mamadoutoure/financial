@@ -4,6 +4,7 @@ module Financial
     #all tax and insurance are year amount
     #revenue: amount gain by renting part of the building, count by year
     attr_accessible :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
+    belongs_to :budget
 
     #TODO: set avg_monthly_expense by tracking average spending
     def before_save
