@@ -1,43 +1,57 @@
 .budget-form
-  =form_for :budget, :url=>new_budget_path, :remote=>true do |b|
-    =b.label "Friendly name for this budget"
-    =b.text_field :name
-    =b.label "Total asset value"
-    =b.text_field :total_asset
-
+  =form_for @budget, :remote=>true do |b|
+    =b.label "Name"
+    =b.text_field :name, :placeholder=>"Friendly name for this budget"
+    %br
+    =b.label "Total asset"
+    =b.text_field :total_asset, :placeholder=>"Total asset value"
+    %hr
     =b.fields_for :mortgage do |m|
       =m.label "Purchased price"
-      =m.text_field :purchased_price
+      =m.text_field :purchased_price, :placeholder=>"Purchased price"
+      %br
       =m.label "Down payment"
       =m.text_field :down_payment
-      =m.label "Anual interest"
-      =m.text_field :interest
-      =m.label "Loan term (in year)"
-      =m.text_field :loan_term
-      =m.label "Anual municipal tax (Canada)"
-      =m.text_field :municipal_tax
-      =m.label "Anual school tax (Canada)"
-      =m.text_field :school_tax
-      =m.label "Anual heating (Canada)"
-      =m.text_field :heating
-      =m.label "Anual house insurance (Canada), not mortgage insurance"
-      =m.text_field :house_insurance
-      =m.label "Anual mortgage insurance (Canada), not taken into account in this calculator"
-      =m.text_field :mortgage_insurance
-      =m.label "Anual revenue from leasing"
-      =m.text_field :revenue
-      =m.label "Estimated average monthly expense for the family"
-      =m.text_field :avg_monthly_expense
-      =m.label "Net monthly income"
-      =m.text_field :net_monthly_income
-
+      %br
+      =m.label "Interest"
+      =m.text_field :interest, :placeholder=>"Annual interest"
+      %br
+      =m.label "Loan term"
+      =m.text_field :loan_term, :placeholder=>"Loan term in year"
+      %br
+      =m.label "Municipal tax"
+      =m.text_field :municipal_tax, :placeholder=>"Annual municipal tax (Canada)"
+      %br
+      =m.label "School tax"
+      =m.text_field :school_tax, :placeholder=>"Annual school tax (Canada)"
+      %br
+      =m.label "Heating cost"
+      =m.text_field :heating, :placeholder=>"Annual heating cost"
+      %br
+      =m.label "House insurance"
+      =m.text_field :house_insurance, :placeholder=>"Annual house insurance"
+      %br
+      =m.label "Mortgage insurance"
+      =m.text_field :mortgage_insurance, :placeholder=>"Annual mortgage insurance, not taken into account in this calculator"
+      %br
+      =m.label "Revenue"
+      =m.text_field :revenue, :placeholder=>"Annual revenue from leasing"
+      %br
+      =m.label "Family expense"
+      =m.text_field :avg_monthly_expense, :placeholder=>"Monthly"
+      %br
+      =m.label "Net income"
+      =m.text_field :net_monthly_income, :placeholder=>"Monthly"
+    %hr
     =b.fields_for :investment do |i|
-      =i.label "Initial value of investment"
-      =i.text_field :principal
+      =i.label "Principal"
+      =i.text_field :principal, :placeholder=>"Initial value of investment"
+      %br
       =i.label "Monthly deposit"
-      =i.text_field :monthly_dep
-      =i.label "Number of month until maturity"
-      =i.text_field :months
+      =i.text_field :monthly_dep, :placeholder=>"monthly saving for investment"
+      %br
+      =i.label "Length"
+      =i.text_field :months, :placeholder=>"Number of month until maturity"
 
     =b.submit "Calculate"
 

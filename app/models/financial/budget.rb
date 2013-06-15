@@ -4,5 +4,7 @@ module Financial
     has_one :mortgage
     has_one :investment
     #it can have more, TODO: make it polymophic association
+    accepts_nested_attributes_for :mortgage
+    accepts_nested_attributes_for :investment
   end
 end
