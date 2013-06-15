@@ -1,0 +1,50 @@
+.budget-form
+  =form_for :budget, :url=>new_budget_path, :remote=>true do |b|
+    =b.label "Friendly name for this budget"
+    =b.text_field :name
+    =b.label "Total asset value"
+    =b.text_field :total_asset
+
+    =b.fields_for :mortgage do |m|
+      =m.label "Purchased price"
+      =m.text_field :purchased_price
+      =m.label "Down payment"
+      =m.text_field :down_payment
+      =m.label "Anual interest"
+      =m.text_field :interest
+      =m.label "Loan term (in year)"
+      =m.text_field :loan_term
+      =m.label "Anual municipal tax (Canada)"
+      =m.text_field :municipal_tax
+      =m.label "Anual school tax (Canada)"
+      =m.text_field :school_tax
+      =m.label "Anual heating (Canada)"
+      =m.text_field :heating
+      =m.label "Anual house insurance (Canada), not mortgage insurance"
+      =m.text_field :house_insurance
+      =m.label "Anual mortgage insurance (Canada), not taken into account in this calculator"
+      =m.text_field :mortgage_insurance
+      =m.label "Anual revenue from leasing"
+      =m.text_field :revenue
+      =m.label "Estimated average monthly expense for the family"
+      =m.text_field :avg_monthly_expense
+      =m.label "Net monthly income"
+      =m.text_field :net_monthly_income
+
+    =b.fields_for :investment do |i|
+      =i.label "Initial value of investment"
+      =i.text_field :principal
+      =i.label "Monthly deposit"
+      =i.text_field :monthly_dep
+      =i.label "Number of month until maturity"
+      =i.text_field :months
+
+    =b.submit "Calculate"
+
+
+    
+
+%hr
+
+.budget-list
+  =render @budgets
