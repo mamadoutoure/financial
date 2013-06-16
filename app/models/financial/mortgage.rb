@@ -6,14 +6,8 @@ module Financial
     attr_accessible :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
     belongs_to :budget
 
-    #TODO: set avg_monthly_expense by tracking average spending
-    def before_save
-      interest = interest/100
-    end
-
     def monthly_mortgage_payment
       loan = purchased_price - down_payment
-      monthly_interest = interest/12
       return (loan * monthly_interest / (1-(1+monthly_interest)**(loan_term*(-12))))
     end
 
@@ -36,7 +30,6 @@ module Financial
     def loan_balance_after(year)
       elapse_year = year #ridiculous but make it clear for dummy
       year_left = loan_term - elapse_year
-      monthly_interest = interest/12  #TODO: refactor
       return (monthly_mortgage_payment * (1- (1+monthly_interest)**(year_left*(-12))) / monthly_interest)
     end
 
@@ -59,6 +52,16 @@ module Financial
     def total_cost_after(year)
       elapse_year = year #ridiculous but make it clear for dummy
       return down_payment + total_payment_after(elapse_year) + loan_balance_after(elapse_year)
+    end
+  protected
+    def in_rate
+      @interest_rate = self.interest/100 if @interest_rate == nil
+      return @interest_rate
+    end
+    #no compound on monthly interest
+    def monthly_interest
+      @m_interest = in_rate/12 if @m_interest == nil
+      return @m_interest
     end
   end
 end
