@@ -1,64 +1,75 @@
 .budget-form
   =form_for @budget, :remote=>true do |b|
-    =b.label "Name"
-    =b.text_field :name, :placeholder=>"Friendly name for this budget"
-    %br
-    =b.label "Total asset"
-    =b.text_field :total_asset, :placeholder=>"Total asset value"
-    %hr
-    =b.fields_for :mortgage do |m|
-      =m.label "Purchased price"
-      =m.text_field :purchased_price, :placeholder=>"Purchased price"
-      %br
-      =m.label "Down payment"
-      =m.text_field :down_payment
-      %br
-      =m.label "Interest"
-      =m.text_field :interest, :placeholder=>"Annual interest"
-      %br
-      =m.label "Loan term"
-      =m.text_field :loan_term, :placeholder=>"Loan term in year"
-      %br
-      =m.label "Municipal tax"
-      =m.text_field :municipal_tax, :placeholder=>"Annual municipal tax (Canada)"
-      %br
-      =m.label "School tax"
-      =m.text_field :school_tax, :placeholder=>"Annual school tax (Canada)"
-      %br
-      =m.label "Heating cost"
-      =m.text_field :heating, :placeholder=>"Annual heating cost"
-      %br
-      =m.label "House insurance"
-      =m.text_field :house_insurance, :placeholder=>"Annual house insurance"
-      %br
-      =m.label "Mortgage insurance"
-      =m.text_field :mortgage_insurance, :placeholder=>"Annual mortgage insurance, not taken into account in this calculator"
-      %br
-      =m.label "Revenue"
-      =m.text_field :revenue, :placeholder=>"Annual revenue from leasing"
-      %br
-      =m.label "Family expense"
-      =m.text_field :avg_monthly_expense, :placeholder=>"Monthly"
-      %br
-      =m.label "Net income"
-      =m.text_field :net_monthly_income, :placeholder=>"Monthly"
-    %hr
-    =b.fields_for :investment do |i|
-      =i.label "Principal"
-      =i.text_field :principal, :placeholder=>"Initial value of investment"
-      %br
-      =i.label "Monthly deposit"
-      =i.text_field :monthly_dep, :placeholder=>"monthly saving for investment"
-      %br
-      =i.label "Length"
-      =i.text_field :months, :placeholder=>"Number of month until maturity"
-
-    =b.submit "Calculate"
-
-
-    
+    %table
+      %tr
+        %th=b.label "Name"
+        %td=b.text_field :name, :placeholder=>"Friendly name for this budget"
+      %tr
+        %th=b.label "Total asset"
+        %td=b.text_field :total_asset, :placeholder=>"Total asset value"
+      %tr
+        %td
+          =b.fields_for :mortgage do |m|
+            %fieldset
+              %legend.mortgage-form Mortgage
+              %table
+                %tr
+                  %th=m.label "Purchased price"
+                  %td=m.text_field :purchased_price, :placeholder=>"Purchased price"
+                %tr
+                  %th=m.label "Down payment"
+                  %td=m.text_field :down_payment
+                %tr
+                  %th=m.label "Interest"
+                  %td=m.text_field :interest, :placeholder=>"Annual interest"
+                %tr
+                  %th=m.label "Loan term"
+                  %td=m.text_field :loan_term, :placeholder=>"Loan term in year"
+                %tr
+                  %th=m.label "Municipal tax"
+                  %td=m.text_field :municipal_tax, :placeholder=>"Annual municipal tax (Canada)"
+                %tr
+                  %th=m.label "School tax"
+                  %td=m.text_field :school_tax, :placeholder=>"Annual school tax (Canada)"
+                %tr
+                  %th=m.label "Heating cost"
+                  %td=m.text_field :heating, :placeholder=>"Annual heating cost"
+                %tr
+                  %th=m.label "House insurance"
+                  %td=m.text_field :house_insurance, :placeholder=>"Annual house insurance"
+                %tr
+                  %th=m.label "Mortgage insurance"
+                  %td=m.text_field :mortgage_insurance, :placeholder=>"Annualy, not taken into account in this calculator"
+                %tr
+                  %th=m.label "Revenue"
+                  %td=m.text_field :revenue, :placeholder=>"Annual revenue from leasing"
+                %tr
+                  %th=m.label "Family expense"
+                  %td=m.text_field :avg_monthly_expense, :placeholder=>"Monthly"
+                %tr
+                  %th=m.label "Net income"
+                  %td=m.text_field :net_monthly_income, :placeholder=>"Monthly"
+        %td
+          =b.fields_for :investment do |i|
+            %fieldset
+              %legend.invesment-form Investment
+              %table
+                %tr
+                  %th=i.label "Principal"
+                  %td=i.text_field :principal, :placeholder=>"Initial value of investment"
+                %tr
+                  %th=i.label "Rate"
+                  %td=i.text_field :rate, :placeholder=>"Annual rate of return"
+                %tr
+                  %th=i.label "Monthly deposit"
+                  %td=i.text_field :monthly_dep, :placeholder=>"Monthly saving for investment"
+                %tr
+                  %th=i.label "Length"
+                  %td=i.text_field :months, :placeholder=>"Number of month until maturity"
+      %tr
+        %td=b.submit "Calculate"
 
 %hr
 
-.budget-list
+#budgets
   =render @budgets
