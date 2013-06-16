@@ -1,6 +1,6 @@
 module Financial
   class Budget < ActiveRecord::Base
-    attr_accessible :name, :total_asset
+    attr_accessible :name, :total_asset, :mortgage_attributes, :investment_attributes
     has_one :mortgage, :dependent => :destroy
     has_one :investment, :dependent => :destroy
     #it can have more, TODO: make it polymophic association
