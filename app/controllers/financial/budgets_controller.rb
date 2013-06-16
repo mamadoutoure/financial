@@ -15,5 +15,11 @@ module Financial
       @budget.save
       render "add_new_budget"
     end
+
+    def destroy
+      @budget = Budget.find(params[:id])
+      @budget.destroy
+      render "delete_budget"
+    end
   end
 end
