@@ -1,5 +1,6 @@
 Financial::Engine.routes.draw do
   resources :budgets
+  resources :investments
 
   resources :payment_types
 
