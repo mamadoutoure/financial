@@ -1,3 +1,28 @@
+:javascript
+  // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+  function AppViewModel() {
+    this.total_asset = ko.observable(0);
+    this.down_payment = ko.observable(10);
+    this.principal = ko.observable(5);
+
+    this.total_asset = ko.computed(function() {
+        debugger
+        return this.down_payment() + this.principal();    
+    }, this);
+    
+    //this.down_payment = ko.computed(function() {
+    //    debugger
+    //    return this.total_asset - this.principal();    
+    //}, this);
+    
+    //this.principal = ko.computed(function() {
+    //    return this.total_asset - this.down_payment();    
+    //}, this);
+  }
+
+  // Activates knockout.js
+  ko.applyBindings(new AppViewModel());
+
 .budget-form
   =form_for @budget, :remote=>true do |b|
     %table
@@ -6,7 +31,7 @@
         %td=b.text_field :name, :placeholder=>"Friendly name for this budget"
       %tr
         %th=b.label "Total asset"
-        %td=b.text_field :total_asset, :placeholder=>"Total asset value"
+        %td=b.text_field :total_asset, :placeholder=>"Total asset value", :"data-bind"=>"value: total_asset"
       %tr
         %td
           =b.fields_for :mortgage do |m|
@@ -18,7 +43,7 @@
                   %td=m.text_field :purchased_price, :placeholder=>"Purchased price"
                 %tr
                   %th=m.label "Down payment"
-                  %td=m.text_field :down_payment
+                  %td=m.text_field :down_payment, :"data-bind"=>"value: down_payment"
                 %tr
                   %th=m.label "Interest"
                   %td=m.text_field :interest, :placeholder=>"Annual interest"
@@ -55,7 +80,7 @@
               %legend.invesment-form Investment
               %table
                 %tr
-                  %th=i.label "Principal"
+                  %th=i.label "Principal", :"data-bind"=>"value: principal"
                   %td=i.text_field :principal, :placeholder=>"Initial value of investment"
                 %tr
                   %th=i.label "Rate"
