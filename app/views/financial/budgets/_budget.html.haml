@@ -1,10 +1,18 @@
-.budget
-  ="Monthly mortgage payment: #{budget.mortgage.monthly_mortgage_payment}"
-  %br
-  ="Monthly payment to bank, municipal, heating, insurance: #{budget.mortgage.monthly_payment}"
-  %br
-  ="Net monthly payment after revenue: #{budget.mortgage.net_monthly_payment}"
-  %br
-  ="Monthly saving after mortgage and family expense: #{budget.mortgage.monthly_saving}"
-  %br
-  ="Monthly saving after mortgage and family expense: #{budget.mortgage.monthly_saving}"
+%fieldset
+  %legend.budget=budget.name
+  %table
+    %tr
+      %th Monthly mortgage payment
+      %td=number_to_currency(budget.mortgage.monthly_mortgage_payment)
+    %tr
+      %th Monthly payment to bank, municipal, heating, insurance:
+      %td=number_to_currency(budget.mortgage.monthly_payment)
+    %tr
+      %th Net monthly payment after revenue:
+      %td=number_to_currency(budget.mortgage.net_monthly_payment)
+    %tr
+      %th Monthly saving after mortgage and family expense:
+      %td=number_to_currency(budget.mortgage.monthly_saving)
+    %tr
+      %th Monthly saving after mortgage and family expense:
+      %td=number_to_currency(budget.mortgage.monthly_saving)
