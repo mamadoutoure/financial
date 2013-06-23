@@ -21,5 +21,9 @@ module Financial
       @budget.destroy
       render "delete_budget"
     end
+
+    def show
+      @budget = Budget.find(params[:id])
+    end
   end
 end
