@@ -8,8 +8,8 @@ module Financial
 
     validates_associated :mortgage
     validates :month, :presence => true
-    validates :amount, :interest, :numericality => true
-    validates :months, :numericality => { :only_integer => true }
+    validates :amount, :interest, :numericality => true , :allow_blank=>true
+    validates :month, :numericality => { :only_integer => true } , :allow_blank=>true
 
     protected
     
