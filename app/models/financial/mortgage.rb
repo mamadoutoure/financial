@@ -67,7 +67,10 @@ module Financial
     attr_accessible :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
     belongs_to :budget
     has_many :mortgage_adjs, :dependent => :destroy
-    #TODO: add validation
+
+    validates :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :avg_monthly_expense, :net_monthly_income, :presence => true
+    validates :purchased_price, :down_payment, :interest, :municipal_tax, :school_tax, :heating, :house_insurance, :avg_monthly_expense, :net_monthly_income, :numericality => true
+    validates :loan_term, :numericality => { :only_integer => true } 
 
     def monthly_mortgage_payment
       @mmp = (loan * monthly_interest / (1-(1+monthly_interest)**(loan_term*(-12)))) if @mmp.blank?
