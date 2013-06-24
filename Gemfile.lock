@@ -46,6 +46,7 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.2)
     diff-lcs (1.2.4)
+    dynamic_form (1.1.4)
     erubis (2.7.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -127,6 +128,7 @@ PLATFORMS
 
 DEPENDENCIES
   debugger
+  dynamic_form
   factory_girl_rails
   financial!
   jquery-rails
