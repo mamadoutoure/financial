@@ -5,7 +5,12 @@ module Financial
     #interest: new interest rate applied since the selected year
     attr_accessible :month, :amount, :interest, :mortgage_id
     belongs_to :mortgage
-    #TODO: add validation
+
+    validates_associated :mortgage
+    validates :month, :presence => true
+    validates :amount, :interest, :numericality => true
+    validates :months, :numericality => { :only_integer => true }
+
     protected
     
     def rate
