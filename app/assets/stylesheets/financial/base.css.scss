@@ -5,3 +5,7 @@ td {text-align:right}
 .close-button{text-align:right}
 .odd {background-color:LightGray}
 .even{background-color:White}
+.field_with_errors{border-style:solid; border-color:Red}
+#errorExplanation{
+  h2{background-color:#D80000; color:White}
+}
