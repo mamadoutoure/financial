@@ -25,7 +25,7 @@ module Financial
     end
 
     def alt_length=(value)
-      @alt_length = ActiveRecord::ConnectionAdapters::Column.value_to_decimal(value)
+      @alt_length = value.to_i #ActiveRecord::ConnectionAdapters::Column.value_to_decimal(value)
     end
 
     def future_value
