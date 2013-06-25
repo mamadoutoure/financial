@@ -15,10 +15,10 @@
                 %td=number_to_currency(budget.mortgage.down_payment)
               %tr.info
                 %th Interest
-                %td=number_to_currency(budget.mortgage.interest)
+                %td="#{number_with_precision(budget.mortgage.interest, :precision=>2)}%"
               %tr.info
                 %th Loan term
-                %td=number_to_currency(budget.mortgage.loan_term)
+                %td="#{budget.mortgage.loan_term} years"
               %tr.info
                 %th Municipal tax
                 %td=number_to_currency(budget.mortgage.municipal_tax)
@@ -63,13 +63,13 @@
                 %td=number_to_currency(budget.investment.principal)
               %tr.info
                 %th Rate
-                %td=number_to_currency(budget.investment.rate)
+                %td="#{number_with_precision(budget.investment.rate, :precision=>2)}%"
               %tr.info
                 %th Monthly deposit
                 %td=number_to_currency(budget.investment.monthly_dep)
               %tr.info
                 %th Length
-                %td=number_to_currency(budget.investment.months)
+                %td="#{budget.investment.months} months"
               %tr
                 %th Value at maturity
                 %td=number_to_currency(budget.investment.future_value)
