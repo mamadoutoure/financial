@@ -1,4 +1,4 @@
-$("#budget-form").html("<%= escape_javascript(render :partial => 'budget_form') %>");
-<%if @budget.valid?%>
-	$("#budgets").append("<%= escape_javascript(render :partial => 'new_budget') %>");
+<%if @saved_budget%>
+	$("#budgets").append("<%= escape_javascript(render :partial => 'budget', :locals=>{:budget=>@saved_budget}) %>");
 <%end%>
+$("#budget-form").html("<%= escape_javascript(render :partial => 'budget_form') %>");
