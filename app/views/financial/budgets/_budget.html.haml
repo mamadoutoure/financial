@@ -1,0 +1,92 @@
+%div{:id=>"budget_#{budget.id}"}
+  %fieldset
+    %legend.budget=budget.name
+    %p.close-button= link_to 'Delete', budget, confirm: 'Are you sure?', method: :delete, :remote=>true
+    .budget-container
+      %table
+        %tr
+          %td
+            %table{:id=>"mortgage_#{budget.mortgage.id}"}
+              %tr.info
+                %th Purchased price
+                %td=number_to_currency(budget.mortgage.purchased_price)
+              %tr.info
+                %th Down payment
+                %td=number_to_currency(budget.mortgage.down_payment)
+              %tr.info
+                %th Interest
+                %td="#{number_with_precision(budget.mortgage.interest, :precision=>2)}%"
+              %tr.info
+                %th Loan term
+                %td="#{budget.mortgage.loan_term} years"
+              %tr.info
+                %th Municipal tax
+                %td=number_to_currency(budget.mortgage.municipal_tax)
+              %tr.info
+                %th School tax
+                %td=number_to_currency(budget.mortgage.school_tax)
+              %tr.info
+                %th Heating cost
+                %td=number_to_currency(budget.mortgage.heating)
+              %tr.info
+                %th House insurance
+                %td=number_to_currency(budget.mortgage.house_insurance)
+              %tr.info
+                %th Mortgage insurance
+                %td=number_to_currency(budget.mortgage.mortgage_insurance)
+              %tr.info
+                %th Revenue
+                %td=number_to_currency(budget.mortgage.revenue)
+              %tr.info
+                %th Family expense
+                %td=number_to_currency(budget.mortgage.avg_monthly_expense)
+              %tr.info
+                %th Net income
+                %td=number_to_currency(budget.mortgage.net_monthly_income)
+              %tr
+                %th Monthly mortgage payment
+                %td=number_to_currency(budget.mortgage.monthly_mortgage_payment)
+              %tr
+                %th Monthly payment to bank, municipal, heating, insurance
+                %td=number_to_currency(budget.mortgage.monthly_payment)
+              %tr
+                %th Net monthly payment after revenue
+                %td=number_to_currency(budget.mortgage.net_monthly_payment)
+              %tr
+                %th Monthly saving after mortgage and family expense
+                %td=number_to_currency(budget.mortgage.monthly_saving)
+                
+          %td
+            %table{:id=>"investment_#{budget.investment.id}"}
+              %tr.info
+                %th Principal
+                %td=number_to_currency(budget.investment.principal)
+              %tr.info
+                %th Rate
+                %td="#{number_with_precision(budget.investment.rate, :precision=>2)}%"
+              %tr.info
+                %th Monthly deposit
+                %td=number_to_currency(budget.investment.monthly_dep)
+              %tr.info
+                %th Length
+                %td="#{budget.investment.months} months"
+              %tr
+                %th Value at maturity
+                %td=number_to_currency(budget.investment.future_value)
+              %tr
+                %td{:colspan=>2}
+                  =form_for budget.investment, :remote=>true do |i|
+                    %fieldset
+                      %legend Alternative investment
+                      %table
+                        %tr
+                          %th=i.label "Alternative monthly deposit"
+                          %td=i.text_field :alt_monthly_dep, :placeholder=>"Alternative monthly saving for investment"
+                        %tr
+                          %th=i.label "Alternative rate"
+                          %td=i.text_field :alt_rate, :placeholder=>"Alternative rate of return"
+                        %tr
+                          %th=i.label "Alternative length"
+                          %td=i.text_field :alt_length, :placeholder=>"Number of month until maturity"
+                        %tr
+                          %td=i.submit "Recalculate"
