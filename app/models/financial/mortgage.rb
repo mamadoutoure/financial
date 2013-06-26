@@ -9,7 +9,6 @@ module Financial
     #TODO: add validation
 
     def monthly_mortgage_payment
-      loan = purchased_price - down_payment
       @mmp = (loan * monthly_interest / (1-(1+monthly_interest)**(loan_term*(-12)))) if @mmp.blank?
       return @mmp
     end
@@ -60,11 +59,6 @@ module Financial
     #return the amount of extra payment for the selected year, zero if no extra payment made on tha year
     def extra_payment_for(month)
       return cached_adjustments[month].try(:amount).to_f
-    end
-
-    #DEPRICATED
-    def balance_at_year(year)
-      loan - (prev_balance + monthly_mortgage_payment*12 + extra_payment_for(year))
     end
 
     #TODO: take into account interest rate change
