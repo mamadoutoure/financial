@@ -1,4 +1,65 @@
 module Financial
+  class MiniMortgage
+    #interest_rate is already in float, not percentage
+    #loan term in year
+    attr_accessor :loan, :interest_rate, :loan_term, :adjustments
+
+    def initialize(loan, interest_rate, loan_term, adjustments)
+      @loan = loan
+      @interest_rate = interest_rate
+      @loan_term = loan_term
+      @adjustments = adjustments
+    end
+
+    def monthly_payment
+      @mmp = (loan * monthly_interest_rate / (1-(1+monthly_interest_rate)**(loan_term*(-12)))) if @mmp.blank?
+      return @mmp
+    end
+    
+    #TODO: take into account interest rate change
+    def reamortization(start_month)
+      amo = []
+      current_month = 1
+      loan_duration = loan_term * 12  #in months
+      prev_balance = loan
+
+      while current_month < loan_duration   #calculate for each month
+        global_month = start_month + current_month - 1 #month count from purchase time
+
+        current_interest= (prev_balance * interest_rate)/12
+        capital_deduction= monthly_payment - current_interest
+        extra_payment = adjustments[global_month].try(:amount).to_f
+        current_balance = prev_balance - capital_deduction - extra_payment
+        amo << {:month=>global_month, :interest=>current_interest,
+                :cap_deduction=>capital_deduction, :balance=>current_balance,
+                :xtra_payment=>extra_payment, :new_rate=>adjustments[global_month].try(:interest),
+                :adj_id=>adjustments[global_month].try(:id)}
+
+        if current_balance <= 0
+          break
+        end
+
+        current_month = current_month + 1
+        prev_balance = current_balance
+
+        new_rate = adjustments[global_month+1].try(:interest)
+        if new_rate != nil #interest rate changed, make a new mortgage with the loan is the previous balance, and the term is whatever years left from this current mortgage
+          years_left = (loan_duration - current_month)/12
+          current_mortgage = MiniMortgage.new(prev_balance, new_rate/100, years_left, adjustments)
+          amo += current_mortgage.reamortization(global_month+1)
+          return amo
+        end
+      end
+      return amo
+    end
+
+    private
+    
+    def monthly_interest_rate
+      interest_rate/12
+    end
+  end
+
   class Mortgage < ActiveRecord::Base
     #loan_term count by year
     #all tax and insurance are year amount
@@ -56,35 +117,17 @@ module Financial
       return down_payment + total_payment_after(elapse_year) + loan_balance_after(elapse_year)
     end
 
+    def amortization
+      amo = [{:month=>0, :interest=>0, :balance=>loan, :xtra_payment=>0, :new_rate=>nil, :adj_id=>nil}] #before any payment, we only have 100% loan
+      mortgage = MiniMortgage.new(loan, in_rate, loan_term, cached_adjustments)
+      return mortgage.reamortization(1)
+    end
+
     #return the amount of extra payment for the selected year, zero if no extra payment made on tha year
     def extra_payment_for(month)
       return cached_adjustments[month].try(:amount).to_f
     end
 
-    #TODO: take into account interest rate change
-    def amortization
-      amo = [{:month=>0, :interest=>0, :balance=>loan, :xtra_payment=>0, :new_rate=>nil, :adj_id=>nil}] #before any payment, we only have 100% loan
-      current_month = 1
-      loan_duration = loan_term * 12  #in months
-      prev_balance = loan
-      while current_month < loan_duration   #calculate for each month
-        current_interest= (prev_balance * in_rate)/12  #TODO: rate can be changed
-        capital_deduction= current_monthly_mortgage_payment(current_month) - current_interest #TODO: monthly_mortgage_payment will be changed because of rate change every 5 year
-        extra_payment = extra_payment_for(current_month)
-        current_balance = prev_balance - capital_deduction - extra_payment
-        amo << {:month=>current_month, :interest=>current_interest,
-                :cap_deduction=>capital_deduction, :balance=>current_balance,
-                :xtra_payment=>extra_payment, :new_rate=>cached_adjustments[current_month].try(:interest),
-                :adj_id=>cached_adjustments[current_month].try(:id)}
-
-        if current_balance <= 0
-          break
-        end
-        current_month = current_month + 1
-        prev_balance = current_balance
-      end
-      return amo
-    end
   protected
     def current_monthly_mortgage_payment(month)
       new_rate = nil
