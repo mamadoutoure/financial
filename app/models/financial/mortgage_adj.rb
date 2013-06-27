@@ -4,6 +4,9 @@ module Financial
     #amount: extra payment for the selected year
     #interest: new interest rate applied since the selected year
     attr_accessible :month, :amount, :interest, :mortgage_id
+
+    monetize :amount
+
     belongs_to :mortgage
 
     validates_associated :mortgage

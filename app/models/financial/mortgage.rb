@@ -4,6 +4,8 @@ module Financial
     #loan term in year
     attr_accessor :loan, :interest_rate, :loan_term, :adjustments
 
+    monetize :loan
+
     def initialize(loan, interest_rate, loan_term, adjustments)
       @loan = loan
       @interest_rate = interest_rate
@@ -65,6 +67,9 @@ module Financial
     #all tax and insurance are year amount
     #revenue: amount gain by renting part of the building, count by year
     attr_accessible :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
+
+    monetize :purchased_price, :down_payment, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
+
     belongs_to :budget
     has_many :mortgage_adjs, :dependent => :destroy
 
