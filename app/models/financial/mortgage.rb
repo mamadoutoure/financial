@@ -1,5 +1,5 @@
 module Financial
-  class MiniMortgage
+  class Amortization
     #interest_rate is already in float, not percentage
     #loan term in year
     attr_accessor :loan, :interest_rate, :loan_term, :adjustments
@@ -17,7 +17,7 @@ module Financial
     end
     
     #TODO: take into account interest rate change
-    def reamortization(start_month)
+    def start(start_month)
       amo = []
       current_month = 1
       loan_duration = loan_term * 12  #in months
@@ -45,8 +45,8 @@ module Financial
         new_rate = adjustments[global_month+1].try(:interest)
         if new_rate != nil #interest rate changed, make a new mortgage with the loan is the previous balance, and the term is whatever years left from this current mortgage
           years_left = (loan_duration - current_month)/12
-          current_mortgage = MiniMortgage.new(prev_balance, new_rate/100, years_left, adjustments)
-          amo += current_mortgage.reamortization(global_month+1)
+          current_mortgage = Amortization.new(prev_balance, new_rate/100, years_left, adjustments)
+          amo += current_mortgage.start(global_month+1)
           return amo
         end
       end
@@ -119,8 +119,8 @@ module Financial
 
     def amortization
       amo = [{:month=>0, :interest=>0, :balance=>loan, :xtra_payment=>0, :new_rate=>nil, :adj_id=>nil}] #before any payment, we only have 100% loan
-      mortgage = MiniMortgage.new(loan, in_rate, loan_term, cached_adjustments)
-      return mortgage.reamortization(1)
+      mortgage = Amortization.new(loan, in_rate, loan_term, cached_adjustments)
+      return mortgage.start(1)
     end
 
     #return the amount of extra payment for the selected year, zero if no extra payment made on tha year
