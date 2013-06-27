@@ -25,4 +25,5 @@ Gem::Specification.new do |s|
   #s.add_development_dependency 'capybara'                    #not used yet
   s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'dynamic_form'
+  s.add_development_dependency 'money-rails'
 end
