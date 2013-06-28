@@ -44,7 +44,7 @@ module Financial
 
         new_rate = adjustments[global_month+1].try(:interest)
         if new_rate != nil #interest rate changed, make a new mortgage with the loan is the previous balance, and the term is whatever years left from this current mortgage
-          years_left = (loan_duration - current_month)/12
+          years_left = (loan_duration - current_month + 1)/12 #rate adjustment happen at the first month of the year, so the number of year left should include the current year
           current_mortgage = Amortization.new(prev_balance, new_rate/100, years_left, adjustments)
           amo += current_mortgage.start(global_month+1)
           return amo
