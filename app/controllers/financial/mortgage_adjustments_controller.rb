@@ -4,16 +4,19 @@ module Financial
   class MortgageAdjustmentsController < ApplicationController
     #update or create a new adjustment if an adjustment already exist for the given month, update it
     def create
-      existing_adj = MortgageAdj.where(:mortgage_id=>params[:adjustment][:mortgage_id],:month=>params[:adjustment][:month]).first
-      if existing_adj.blank?
-        adjustment = MortgageAdj.new(params[:adjustment])
-        adjustment.save
+      @adjustment = MortgageAdj.where(:mortgage_id=>params[:adjustment][:mortgage_id],:month=>params[:adjustment][:month]).first
+      if @adjustment.blank?
+        @adjustment = MortgageAdj.new(params[:adjustment])
       else
-        existing_adj.attributes=params[:adjustment]
-        existing_adj.save
+        @adjustment.attributes=params[:adjustment]
+      end
+      
+      if @adjustment.save
+        @adjustment=MortgageAdjustment.new
       end
 
-      redirect_to :controller=>:budgets, :action=>:show, :id=>adjustment.mortgage_id
+      @budget = Mortgage.where(:id=>params[:adjustment][:mortgage_id]).first.budget
+      render "financial/budgets/update_detail"
     end
 
     def destroy
