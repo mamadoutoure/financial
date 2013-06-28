@@ -7,7 +7,8 @@ module Financial
     #it can have more, TODO: make it polymophic association
     accepts_nested_attributes_for :mortgage
     accepts_nested_attributes_for :investment
-
+    #TODO:add validation
+    
     protected
     def set_values
       if self.name.blank?

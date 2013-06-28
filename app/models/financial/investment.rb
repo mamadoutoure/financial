@@ -3,6 +3,7 @@ module Financial
     attr_accessible :principal, :rate, :monthly_dep, :months, :alt_rate, :alt_monthly_dep, :alt_length
     #virtual attributes
     attr_reader :alt_rate, :alt_monthly_dep, :alt_length
+    #TODO: add validation
     
     belongs_to :budget
     before_create :set_values
