@@ -1,8 +1,8 @@
 module Financial
   class Budget < ActiveRecord::Base
-    attr_accessible :name, :total_asset, :mortgage_attributes, :investment_attributes
+    monetize :total_asset_cents
 
-    monetize :total_asset
+    attr_accessible :name, :total_asset, :mortgage_attributes, :investment_attributes
 
     before_save :set_values
 
