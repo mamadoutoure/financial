@@ -4,8 +4,6 @@ module Financial
     #loan term in year
     attr_accessor :loan, :interest_rate, :loan_term, :adjustments
 
-    monetize :loan
-
     def initialize(loan, interest_rate, loan_term, adjustments)
       @loan = loan
       @interest_rate = interest_rate
@@ -30,7 +28,8 @@ module Financial
 
         current_interest= (prev_balance * interest_rate)/12
         capital_deduction= monthly_payment - current_interest
-        extra_payment = adjustments[global_month].try(:amount).to_f
+        extra_payment = adjustments[global_month]
+        extra_payment = extra_payment != nil ? extra_payment.amount : Money.new(0)
         current_balance = prev_balance - capital_deduction - extra_payment
         amo << {:month=>global_month, :interest=>current_interest,
                 :cap_deduction=>capital_deduction, :balance=>current_balance,
@@ -63,12 +62,21 @@ module Financial
   end
 
   class Mortgage < ActiveRecord::Base
+    monetize :purchased_price_cents 
+    monetize :down_payment_cents
+    monetize :municipal_tax_cents
+    monetize :school_tax_cents
+    monetize :heating_cents
+    monetize :house_insurance_cents
+    monetize :mortgage_insurance_cents
+    monetize :revenue_cents
+    monetize :avg_monthly_expense_cents
+    monetize :net_monthly_income_cents
+
     #loan_term count by year
     #all tax and insurance are year amount
     #revenue: amount gain by renting part of the building, count by year
     attr_accessible :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
-
-    monetize :purchased_price, :down_payment, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
 
     belongs_to :budget
     has_many :mortgage_adjs, :dependent => :destroy

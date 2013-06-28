@@ -1,11 +1,11 @@
 module Financial
   class MortgageAdj < ActiveRecord::Base
+    monetize :amount_cents
+
     #month: selected month
     #amount: extra payment for the selected year
     #interest: new interest rate applied since the selected year
     attr_accessible :month, :amount, :interest, :mortgage_id
-
-    monetize :amount
 
     belongs_to :mortgage
 
