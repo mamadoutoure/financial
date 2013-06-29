@@ -11,8 +11,6 @@ class CreateFinancialMortgages < ActiveRecord::Migration
       t.money :house_insurance
       t.money :mortgage_insurance
       t.money :revenue
-      t.money :avg_monthly_expense
-      t.money :net_monthly_income
       t.column :plan_id, :integer
       t.timestamps
     end

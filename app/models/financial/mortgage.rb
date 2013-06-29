@@ -70,13 +70,11 @@ module Financial
     monetize :house_insurance_cents
     monetize :mortgage_insurance_cents
     monetize :revenue_cents
-    monetize :avg_monthly_expense_cents
-    monetize :net_monthly_income_cents
 
     #loan_term count by year
     #all tax and insurance are year amount
     #revenue: amount gain by renting part of the building, count by year
-    attr_accessible :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
+    attr_accessible :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue
 
     belongs_to :plan
     has_many :mortgage_adjs, :dependent => :destroy
@@ -98,11 +96,6 @@ module Financial
     #amount need to pay after revenue deduction
     def net_monthly_payment
       return (monthly_payment - revenue/12)
-    end
-
-    #amount left after all spending
-    def monthly_saving
-      return (net_monthly_income - net_monthly_payment - avg_monthly_expense)
     end
 
     def loan_balance_after(year)

@@ -15,6 +15,16 @@ module Financial
     validates_associated :mortgage
     validates_associated :investment
 
+    def finance
+      @fi = person.finance if @fi.blank?
+      return @fi
+    end
+
+    #amount left after all spending
+    def monthly_saving
+      return (finance.net_monthly_income - mortgage.net_monthly_payment - finance.net_monthly_expense)
+    end
+
     protected
     #set default friendly name if not provided, sum investment and mortgage down payment
     def set_values

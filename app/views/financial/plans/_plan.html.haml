@@ -43,10 +43,10 @@
                 %td=number_to_currency(plan.mortgage.revenue)
               %tr.info
                 %th Family expense
-                %td=number_to_currency(plan.mortgage.avg_monthly_expense)
+                %td=number_to_currency(plan.finance.net_monthly_expense)
               %tr.info
                 %th Net income
-                %td=number_to_currency(plan.mortgage.net_monthly_income)
+                %td=number_to_currency(plan.finance.net_monthly_income)
               %tr
                 %th Monthly mortgage payment
                 %td=number_to_currency(plan.mortgage.monthly_mortgage_payment)
@@ -58,7 +58,7 @@
                 %td=number_to_currency(plan.mortgage.net_monthly_payment)
               %tr
                 %th Monthly saving after mortgage and family expense
-                %td=number_to_currency(plan.mortgage.monthly_saving)
+                %td=number_to_currency(plan.monthly_saving)
                 
           %td
             %table{:id=>"investment_#{plan.investment.id}"}
