@@ -1,8 +1,6 @@
 module Financial
   class Plan < ActiveRecord::Base
-    monetize :total_asset_cents
-
-    attr_accessible :name, :total_asset, :mortgage_attributes, :investment_attributes
+    attr_accessible :name, :mortgage_attributes, :investment_attributes
 
     before_save :set_values
 
@@ -22,7 +20,6 @@ module Financial
       if self.name.blank?
         self.name = Time.now.to_s
       end
-      self.total_asset = self.mortgage.down_payment + self.investment.principal
     end
   end
 end

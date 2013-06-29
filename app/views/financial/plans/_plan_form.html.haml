@@ -4,9 +4,6 @@
       %th=b.label "Name"
       %td=b.text_field :name, :placeholder=>"Friendly name for this plan"
     %tr
-      %th=b.label "Total asset"
-      %td=b.text_field :total_asset, :placeholder=>"Total asset value", :"data-bind"=>"value: total_asset"
-    %tr
       %td
         =b.fields_for :mortgage do |m|
           = m.error_messages
