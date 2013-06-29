@@ -6,5 +6,7 @@ module Financial
     attr_accessible :net_monthly_income, :net_monthly_expense, :person_id
 
     belongs_to :person
+
+    validates_associated :person
   end
 end

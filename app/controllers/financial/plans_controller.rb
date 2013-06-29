@@ -3,15 +3,18 @@ require_dependency "financial/application_controller"
 module Financial
   class PlansController < ApplicationController
     def index
+      person = Person.where(:email=>session[:cas_user]).first
       @plan = Plan.new
       #see http://stackoverflow.com/questions/4867880/nested-attributes-in-rails-3
       @plan.build_mortgage
       @plan.build_investment
-      @plans = Plan.all
+      @plans = Plan.where(:person_id=>person.id).all
     end
 
     def create
+      person = Person.where(:email=>session[:cas_user]).first
       @plan = Plan.new(params[:plan])
+      @plan.person = person
       if @plan.save #valid plan
         @saved_plan = @plan #used to render recently added plan
         @plan = Plan.new(params[:plan]) #used to populate form

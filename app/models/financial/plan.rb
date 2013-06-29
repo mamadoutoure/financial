@@ -14,6 +14,7 @@ module Financial
     
     validates_associated :mortgage
     validates_associated :investment
+    validates_associated :person
 
     def finance
       @fi = person.finance if @fi.blank?
