@@ -22,7 +22,7 @@ module Financial
       if self.name.blank?
         self.name = Time.now.to_s
       end
-      self.total_asset = self.mortgage.down_payment.to_f + self.investment.principal.to_f
+      self.total_asset = self.mortgage.down_payment + self.investment.principal
     end
   end
 end
