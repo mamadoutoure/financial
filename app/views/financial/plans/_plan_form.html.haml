@@ -1,8 +1,8 @@
-=form_for @budget, :remote=>true do |b|
+=form_for @plan, :remote=>true do |b|
   %table
     %tr
       %th=b.label "Name"
-      %td=b.text_field :name, :placeholder=>"Friendly name for this budget"
+      %td=b.text_field :name, :placeholder=>"Friendly name for this plan"
     %tr
       %th=b.label "Total asset"
       %td=b.text_field :total_asset, :placeholder=>"Total asset value", :"data-bind"=>"value: total_asset"

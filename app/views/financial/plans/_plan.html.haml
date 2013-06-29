@@ -1,85 +1,85 @@
-%div{:id=>"budget_#{budget.id}"}
+%div{:id=>"plan_#{plan.id}"}
   %fieldset
-    %legend.budget=budget.name
+    %legend.plan=plan.name
     %p.detail-button
     %p.close-button
-      = link_to 'Amortization', budget
+      = link_to 'Amortization', plan
       |
-      = link_to 'Delete', budget, confirm: 'Are you sure?', method: :delete, :remote=>true
-    .budget-container
+      = link_to 'Delete', plan, confirm: 'Are you sure?', method: :delete, :remote=>true
+    .plan-container
       %table
         %tr
           %td
-            %table{:id=>"mortgage_#{budget.mortgage.id}"}
+            %table{:id=>"mortgage_#{plan.mortgage.id}"}
               %tr.info
                 %th Purchased price
-                %td=number_to_currency(budget.mortgage.purchased_price)
+                %td=number_to_currency(plan.mortgage.purchased_price)
               %tr.info
                 %th Down payment
-                %td=number_to_currency(budget.mortgage.down_payment)
+                %td=number_to_currency(plan.mortgage.down_payment)
               %tr.info
                 %th Interest
-                %td="#{number_with_precision(budget.mortgage.interest, :precision=>2)}%"
+                %td="#{number_with_precision(plan.mortgage.interest, :precision=>2)}%"
               %tr.info
                 %th Loan term
-                %td="#{budget.mortgage.loan_term} years"
+                %td="#{plan.mortgage.loan_term} years"
               %tr.info
                 %th Municipal tax
-                %td=number_to_currency(budget.mortgage.municipal_tax)
+                %td=number_to_currency(plan.mortgage.municipal_tax)
               %tr.info
                 %th School tax
-                %td=number_to_currency(budget.mortgage.school_tax)
+                %td=number_to_currency(plan.mortgage.school_tax)
               %tr.info
                 %th Heating cost
-                %td=number_to_currency(budget.mortgage.heating)
+                %td=number_to_currency(plan.mortgage.heating)
               %tr.info
                 %th House insurance
-                %td=number_to_currency(budget.mortgage.house_insurance)
+                %td=number_to_currency(plan.mortgage.house_insurance)
               %tr.info
                 %th Mortgage insurance
-                %td=number_to_currency(budget.mortgage.mortgage_insurance)
+                %td=number_to_currency(plan.mortgage.mortgage_insurance)
               %tr.info
                 %th Revenue
-                %td=number_to_currency(budget.mortgage.revenue)
+                %td=number_to_currency(plan.mortgage.revenue)
               %tr.info
                 %th Family expense
-                %td=number_to_currency(budget.mortgage.avg_monthly_expense)
+                %td=number_to_currency(plan.mortgage.avg_monthly_expense)
               %tr.info
                 %th Net income
-                %td=number_to_currency(budget.mortgage.net_monthly_income)
+                %td=number_to_currency(plan.mortgage.net_monthly_income)
               %tr
                 %th Monthly mortgage payment
-                %td=number_to_currency(budget.mortgage.monthly_mortgage_payment)
+                %td=number_to_currency(plan.mortgage.monthly_mortgage_payment)
               %tr
                 %th Monthly payment to bank, municipal, heating, insurance
-                %td=number_to_currency(budget.mortgage.monthly_payment)
+                %td=number_to_currency(plan.mortgage.monthly_payment)
               %tr
                 %th Net monthly payment after revenue
-                %td=number_to_currency(budget.mortgage.net_monthly_payment)
+                %td=number_to_currency(plan.mortgage.net_monthly_payment)
               %tr
                 %th Monthly saving after mortgage and family expense
-                %td=number_to_currency(budget.mortgage.monthly_saving)
+                %td=number_to_currency(plan.mortgage.monthly_saving)
                 
           %td
-            %table{:id=>"investment_#{budget.investment.id}"}
+            %table{:id=>"investment_#{plan.investment.id}"}
               %tr.info
                 %th Principal
-                %td=number_to_currency(budget.investment.principal)
+                %td=number_to_currency(plan.investment.principal)
               %tr.info
                 %th Rate
-                %td="#{number_with_precision(budget.investment.rate, :precision=>2)}%"
+                %td="#{number_with_precision(plan.investment.rate, :precision=>2)}%"
               %tr.info
                 %th Monthly deposit
-                %td=number_to_currency(budget.investment.monthly_dep)
+                %td=number_to_currency(plan.investment.monthly_dep)
               %tr.info
                 %th Length
-                %td="#{budget.investment.months} months"
+                %td="#{plan.investment.months} months"
               %tr
                 %th Value at maturity
-                %td=number_to_currency(budget.investment.future_value)
+                %td=number_to_currency(plan.investment.future_value)
               %tr
                 %td{:colspan=>2}
-                  =form_for budget.investment, :remote=>true do |i|
+                  =form_for plan.investment, :remote=>true do |i|
                     %fieldset
                       %legend Alternative investment
                       %table

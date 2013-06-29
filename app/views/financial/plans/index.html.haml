@@ -23,9 +23,9 @@
   // Activates knockout.js
   ko.applyBindings(new AppViewModel());
 
-.budget-form#budget-form
-  =render :partial=>"budget_form"
+.plan-form#plan-form
+  =render :partial=>"plan_form"
 %hr
 
-#budgets
-  =render @budgets
+#plans
+  =render @plans
