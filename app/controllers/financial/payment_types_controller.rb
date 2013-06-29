@@ -3,7 +3,7 @@ require_dependency "financial/application_controller"
 module Financial
   class PaymentTypesController < ApplicationController
     #Service tab
-    set_tab :financial
+    set_tab :payment_type
     #Resource tab: payment_type
     set_tab :all, :payment_types
     #Action tab, each action tab correspond to one action, they belong to the namespace 'payment_type_actions'
