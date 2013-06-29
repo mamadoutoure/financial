@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Financial
-  describe BudgetsController do
+  describe PlansController do
   
   end
 end
