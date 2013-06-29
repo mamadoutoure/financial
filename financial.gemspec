@@ -26,6 +26,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'dynamic_form'
   s.add_development_dependency 'money-rails'
-  s.add_development_dependency 'rubycas-client-rails', :git => 'git://github.com/rubycas/rubycas-client-rails.git'
+  s.add_development_dependency 'rubycas-client-rails'#, :git => 'git://github.com/rubycas/rubycas-client-rails.git'
   s.add_development_dependency 'rubycas-client'
 end
