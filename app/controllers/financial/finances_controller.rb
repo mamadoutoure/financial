@@ -2,6 +2,8 @@ require_dependency "financial/application_controller"
 
 module Financial
   class FinancesController < ApplicationController
+    skip_before_filter :check_user_finance, :only => [:new, :create]
+
     def new
       @finance = @person.finance.build
     end
