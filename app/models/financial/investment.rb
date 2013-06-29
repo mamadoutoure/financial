@@ -19,23 +19,19 @@ module Financial
 
     #cast virtual attributes to avoid validation errors
     def alt_rate=(value)
-      if !value.is_a?(Money)
-        @alt_rate = Money.new((value*100).to_i)#ActiveRecord::ConnectionAdapters::Column.value_to_decimal(value)
-      else
-        @alt_rate = value
-      end
+      @alt_rate = ActiveRecord::ConnectionAdapters::Column.value_to_decimal(value)
     end
 
     def alt_monthly_dep=(value)
       if !value.is_a?(Money)
-        @alt_monthly_dep = Money.new((value*100).to_i)#ActiveRecord::ConnectionAdapters::Column.value_to_decimal(value)
+        @alt_monthly_dep = Money.new((value.to_f*100).to_i)
       else
         @alt_monthly_dep = value
       end
     end
 
     def alt_length=(value)
-      @alt_length = value.to_i #ActiveRecord::ConnectionAdapters::Column.value_to_decimal(value)
+      @alt_length = value.to_i
     end
 
     def future_value
