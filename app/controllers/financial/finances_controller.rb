@@ -5,14 +5,17 @@ module Financial
     skip_before_filter :check_user_finance, :only => [:new, :create]
 
     def new
-      @finance = @person.finance.build
+      person = Person.where(:email=>session[:cas_user]).first
+      @finance = Finance.new(:person_id=>person.id)
     end
 
     def create
-      if @person.finance.blank?
+      person = Person.where(:email=>session[:cas_user]).first
+      if person.finance.blank?
         @finance = Finance.new(params[:finance])
+        @finance.person = person
       else
-        @finance = @person.finance
+        @finance = person.finance
         @finance.attributes=params[:finance]
       end
       if @finance.save
