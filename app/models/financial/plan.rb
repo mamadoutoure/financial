@@ -1,5 +1,5 @@
 module Financial
-  class Budget < ActiveRecord::Base
+  class Plan < ActiveRecord::Base
     monetize :total_asset_cents
 
     attr_accessible :name, :total_asset, :mortgage_attributes, :investment_attributes
