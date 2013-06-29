@@ -1,6 +1,6 @@
 module Financial
   class Investment < ActiveRecord::Base
-    monetize :principal_cents 
+    monetize :principal_cents
     monetize :monthly_dep_cents
 
     attr_accessible :principal, :rate, :monthly_dep, :months, :alt_rate, :alt_monthly_dep, :alt_length
@@ -8,18 +8,16 @@ module Financial
     #virtual attributes
     attr_reader :alt_rate, :alt_monthly_dep, :alt_length
 
-    validates :principal, :rate, :monthly_dep, :months, :presence => true
-    validates :principal, :rate, :monthly_dep, :numericality => true
+    validates :rate, :numericality => true
     validates :months, :numericality => { :only_integer => true }
-    validates :alt_rate, :alt_monthly_dep, :numericality => true, :allow_blank=>true
+    validates :alt_rate, :numericality => true, :allow_blank=>true
     validates :alt_length, :numericality => { :only_integer => true }, :allow_blank=>true
 
     belongs_to :budget
 
     before_create :set_values
 
-    #setter for virtual attributes with auto cast
-    #see http://stackoverflow.com/questions/11561141/type-cast-an-activerecord-model-virtual-attribute
+    #cast virtual attributes to avoid validation errors
     def alt_rate=(value)
       if !value.is_a?(Money)
         @alt_rate = Money.new((value*100).to_i)#ActiveRecord::ConnectionAdapters::Column.value_to_decimal(value)

@@ -81,8 +81,7 @@ module Financial
     belongs_to :budget
     has_many :mortgage_adjs, :dependent => :destroy
 
-    validates :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :avg_monthly_expense, :net_monthly_income, :presence => true
-    validates :purchased_price, :down_payment, :interest, :municipal_tax, :school_tax, :heating, :house_insurance, :avg_monthly_expense, :net_monthly_income, :numericality => true
+    validates :interest, :numericality => true
     validates :loan_term, :numericality => { :only_integer => true } 
 
     def monthly_mortgage_payment
