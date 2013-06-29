@@ -3,7 +3,7 @@ require_dependency "financial/application_controller"
 module Financial
   class ExpTypesController < ApplicationController
     #Service tab
-    set_tab :financial
+    set_tab :expense_type
     #resource tab
     set_tab :all, :expense_types
     #action tab, each action tab correspond to one action, they belong to the namespace 'expense_type_acrtions'
