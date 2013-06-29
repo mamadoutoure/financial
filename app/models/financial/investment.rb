@@ -13,7 +13,7 @@ module Financial
     validates :alt_rate, :numericality => true, :allow_blank=>true
     validates :alt_length, :numericality => { :only_integer => true }, :allow_blank=>true
 
-    belongs_to :budget
+    belongs_to :plan
 
     before_create :set_values
 

@@ -78,7 +78,7 @@ module Financial
     #revenue: amount gain by renting part of the building, count by year
     attr_accessible :purchased_price, :down_payment, :interest, :loan_term, :municipal_tax, :school_tax, :heating, :house_insurance, :mortgage_insurance, :revenue, :avg_monthly_expense, :net_monthly_income
 
-    belongs_to :budget
+    belongs_to :plan
     has_many :mortgage_adjs, :dependent => :destroy
 
     validates :interest, :numericality => true
