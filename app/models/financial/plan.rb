@@ -6,6 +6,7 @@ module Financial
 
     has_one :mortgage, :dependent => :destroy
     has_one :investment, :dependent => :destroy
+    belongs_to :person
 
     #it can have more, TODO: make it polymophic association
     accepts_nested_attributes_for :mortgage
