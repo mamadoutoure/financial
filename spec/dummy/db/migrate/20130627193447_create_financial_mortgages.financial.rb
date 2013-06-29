@@ -14,7 +14,7 @@ class CreateFinancialMortgages < ActiveRecord::Migration
       t.money :revenue
       t.money :avg_monthly_expense
       t.money :net_monthly_income
-      t.column :budget_id, :integer
+      t.column :plan_id, :integer
       t.timestamps
     end
   end
