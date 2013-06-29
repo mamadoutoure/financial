@@ -1,6 +1,6 @@
-class CreateFinancialBudgets < ActiveRecord::Migration
+class CreateFinancialPlans < ActiveRecord::Migration
   def change
-    create_table :financial_budgets do |t|
+    create_table :financial_plans do |t|
       t.column :name, :string
       t.money :total_asset
       t.timestamps
