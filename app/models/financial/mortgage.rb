@@ -23,7 +23,7 @@ module Financial
       loan_duration = loan_term * 12  #in months
       prev_balance = loan
 
-      while current_month < loan_duration   #calculate for each month
+      while current_month <= loan_duration   #calculate for each month
         global_month = start_month + current_month - 1 #month count from purchase time
 
         current_interest= (prev_balance * interest_rate)/12
