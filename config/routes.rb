@@ -1,5 +1,5 @@
 Financial::Engine.routes.draw do
-  resources :budgets
+  resources :plans
   resources :investments
   resources :mortgage_adjustments
 
@@ -10,5 +10,5 @@ Financial::Engine.routes.draw do
 
   resources :expenses
 
-  root :to => 'budgets#index'
+  root :to => 'plans#index'
 end

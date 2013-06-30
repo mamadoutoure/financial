@@ -1,5 +1,5 @@
 =form_for :adjustment, :url=>{:controller=>:mortgage_adjustments, :action=>:create}, :remote=>true do |a|
-  =a.hidden_field :mortgage_id, :value=>@budget.mortgage.id
+  =a.hidden_field :mortgage_id, :value=>@plan.mortgage.id
   %fieldset
     %legend Adjustment
     = a.error_messages
@@ -24,7 +24,7 @@
     %th Extra payment
     %th Balance
     %th New interest rate
-  -@budget.mortgage.amortization.each do |month|
+  -@plan.mortgage.amortization.each do |month|
     %tr{:class=>cycle('even', 'odd')}
       %td=month[:month]
       %td=number_to_currency(month[:interest])

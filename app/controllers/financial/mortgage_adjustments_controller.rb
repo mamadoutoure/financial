@@ -15,14 +15,14 @@ module Financial
         @adjustment=MortgageAdj.new
       end
 
-      @budget = Mortgage.where(:id=>params[:adjustment][:mortgage_id]).first.budget
-      render "financial/budgets/update_detail"
+      @plan = Mortgage.where(:id=>params[:adjustment][:mortgage_id]).first.plan
+      render "financial/plans/update_detail"
     end
 
     def destroy
       existing_adj = MortgageAdj.find(params[:id])
       existing_adj.destroy
-      redirect_to :controller=>:budgets, :action=>:show, :id=>existing_adj.mortgage_id
+      redirect_to :controller=>:plans, :action=>:show, :id=>existing_adj.mortgage_id
     end
   end
 end
