@@ -40,12 +40,6 @@
               %tr
                 %th=m.label "Revenue"
                 %td=m.text_field :revenue, :placeholder=>"Annual revenue from leasing"
-              %tr
-                %th=m.label "Family expense"
-                %td=m.text_field :avg_monthly_expense, :placeholder=>"Monthly"
-              %tr
-                %th=m.label "Net income"
-                %td=m.text_field :net_monthly_income, :placeholder=>"Monthly"
       %td
         =b.fields_for :investment do |i|
           = i.error_messages

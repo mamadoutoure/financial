@@ -4,6 +4,7 @@ module Financial
 
     attr_accessible :email
 
-    has_one :finance
+    has_one :finance, :dependent => :destroy
+    has_many :plans, :dependent => :destroy
   end
 end
