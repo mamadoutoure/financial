@@ -12,7 +12,12 @@ module Financial
 
     def create
       @budget = Budget.new(params[:budget])
-      @budget.save
+      if @budget.save #valid budget
+        @saved_budget = @budget #used to render recently added budget
+        @budget = Budget.new(params[:budget]) #used to populate form
+      else
+        #return the budget with error to be displayed
+      end
       render "add_new_budget"
     end
 
