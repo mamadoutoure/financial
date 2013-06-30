@@ -1,3 +1,4 @@
+# This migration comes from financial (originally 20130612225736)
 class CreateFinancialMortgages < ActiveRecord::Migration
   def change
     create_table :financial_mortgages do |t|

@@ -12,7 +12,7 @@ module Financial
       end
       
       if @adjustment.save
-        @adjustment=MortgageAdjustment.new
+        @adjustment=MortgageAdj.new
       end
 
       @budget = Mortgage.where(:id=>params[:adjustment][:mortgage_id]).first.budget
